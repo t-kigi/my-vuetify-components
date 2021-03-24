@@ -1,93 +1,74 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          components/ui/OneClickButton.vue
         </v-card-title>
         <v-card-text>
           <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
+            Simple v-btn wrapper. Its state changes into disabled after click
+            OneClickButton until async callback function finished.
           </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <one-click-button
+            color="error"
+            :clickCallback="oneClickButtonCallback"
           >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+            disable 3 seconds (as minimum) after click it
+          </one-click-button>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="8" md="6">
+      <v-card>
+        <v-card-title class="headline">
+          components/ui/EventMessageBoard.vue
+        </v-card-title>
+        <v-card-text>
+          <p>
+            Message Box(es) hide itself automatically after several seconds. For
+            example, to show error message(s) is good usage.
+          </p>
+          <v-btn color="info" @click="clickEventMessageBoard">
+            Add new message
+          </v-btn>
+          <event-message-board
+            ref="eventMessageBoardExample"
+            color="error"
+            :timeout="2000"
+          />
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import OneClickButton from '~/components/ui/OneClickButton';
+import EventMessageBoard from '~/components/ui/EventMessageBoard';
 
 export default {
   components: {
-    Logo,
-    VuetifyLogo,
+    OneClickButton,
+    EventMessageBoard,
   },
-}
+  data() {
+    return {};
+  },
+  methods: {
+    async sleep(waitSec) {
+      return new Promise(function (resolve) {
+        setTimeout(() => {
+          resolve();
+        }, waitSec);
+      });
+    },
+    async oneClickButtonCallback() {
+      await this.sleep(3000);
+    },
+    clickEventMessageBoard() {
+      this.$refs.eventMessageBoardExample.add(new Date());
+    },
+  },
+};
 </script>
