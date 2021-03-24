@@ -57,7 +57,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'My Vuetify.js Components Library',
-    }
+    };
   },
-}
+};
 </script>

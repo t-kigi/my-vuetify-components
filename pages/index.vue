@@ -12,7 +12,7 @@
           </p>
           <one-click-button
             color="error"
-            :clickCallback="oneClickButtonCallback"
+            :click-callback="oneClickButtonCallback"
           >
             disable 3 seconds (as minimum) after click it
           </one-click-button>
@@ -56,7 +56,7 @@ export default {
     return {};
   },
   methods: {
-    async sleep(waitSec) {
+    sleep(waitSec) {
       return new Promise(function (resolve) {
         setTimeout(() => {
           resolve();

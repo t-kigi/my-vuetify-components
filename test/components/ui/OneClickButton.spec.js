@@ -73,7 +73,7 @@ describe('OneClickButton', () => {
         clickCallback: () => {
           // callback イベントが呼び出されるときはボタンは無効
           expect(wrapper.vm.disabled).toBe(true);
-          throw 'error';
+          throw new Error('test fake error');
         },
       },
     });
