@@ -15,6 +15,9 @@ $ yarn start
 
 # generate static project
 $ yarn generate
+
+# update github pages (after yarn generate)
+$ yarn gh-pages -d dist -b pages -m 'update'
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
